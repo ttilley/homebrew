@@ -2,7 +2,7 @@ require 'formula'
 
 class Cloog < Formula
   homepage 'http://www.cloog.org/'
-  url 'http://www.bastoul.net/cloog/pages/download/count.php3?url=./cloog-0.17.0.tar.gz'
+  url 'http://www.bastoul.net/cloog/pages/download/cloog-0.17.0.tar.gz'
   sha1 'decc2221b1f1bd9238288d043835cb018af15d5a'
 
   depends_on 'pkg-config' => :build
@@ -13,7 +13,9 @@ class Cloog < Formula
     args = [
       "--disable-dependency-tracking",
       "--prefix=#{prefix}",
-      "--with-isl-prefix=#{Formula.factory('isl').opt_prefix}"
+      "--enable-portable-binary",
+      "--with-gmp-prefix=#{Formula.factory('gmp').opt_prefix}",
+      "--with-isl-prefix=#{Formula.factory('isl').opt_prefix}",
     ]
 
     system "./configure", *args

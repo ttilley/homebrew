@@ -3,21 +3,20 @@ require 'formula'
 class Piplib < Formula
   homepage 'http://www.piplib.org/'
   url 'http://www.bastoul.net/cloog/pages/download/piplib-1.4.0.tar.gz'
-  head 'git://repo.or.cz/piplib.git'
-  version '1.4.0'
   sha1 '35752b4ac9a7170766eb62c791d1a10582c675f9'
+  head 'git://repo.or.cz/piplib.git'
 
   depends_on 'gmp'
-  depends_on 'libtool'
-  depends_on 'automake'
-  depends_on 'autoconf'
+  depends_on 'libtool' => :build
+  depends_on 'automake' => :build
+  depends_on 'autoconf' => :build
 
   def install
     args = [
       '--disable-dependency-tracking',
       "--prefix=#{prefix}",
-      # without specifying an arch, piplib will attempt to guess. poorly.
-      '--with-gcc-arch=native'
+      '--enable-portable-binary',
+      "--with-gmp=#{Formula.factory('gmp').opt_prefix}"
     ]
 
     # piplib 1.4.0 absolutely will not compile on darwin without this
