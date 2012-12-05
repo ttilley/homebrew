@@ -17,6 +17,8 @@ class Isl < Formula
     ]
 
     system "./configure", *args
+    system "make"
+    system "make check"
     system "make install"
   end
 end
